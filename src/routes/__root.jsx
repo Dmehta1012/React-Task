@@ -1,15 +1,22 @@
-import * as React from 'react'
-import { Outlet, createRootRoute } from '@tanstack/react-router'
+import { createRootRoute, Outlet, useLocation } from "@tanstack/react-router";
+import { Navbar } from "../common/Navbar";     // named import
+import { Footer } from "../common/Footer";     // named import
 
 export const Route = createRootRoute({
-  component: RootComponent,
-})
+  component: RootLayout,
+});
 
-function RootComponent() {
+function RootLayout() {
+  const location = useLocation();
+  const isAdmin = location.pathname.startsWith("/admin");
+
   return (
-    <React.Fragment>
-      <div><h1>hello</h1></div>
+    <>
+      {!isAdmin && <Navbar />}
+
       <Outlet />
-    </React.Fragment>
-  )
+
+      {!isAdmin && <Footer />}
+    </>
+  );
 }
