@@ -1,8 +1,9 @@
-import Blogs from '@/pages/Blog.jsx'
 import { createFileRoute } from '@tanstack/react-router'
-// import Blog from '../../pages/Blog.jsx'
+
 export const Route = createFileRoute('/blog')({
-  component: Blogs,
+  component: RouteComponent,
 })
 
-
+function RouteComponent() {
+  return <div>Hello "/blog"!</div>
+}
