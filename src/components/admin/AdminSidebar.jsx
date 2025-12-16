@@ -30,9 +30,9 @@ const menuItems = [
     href: "/admin/products",
   },
   {
-    title: "Users",
-    icon: Users,
-    href: "/admin/users",
+    title: "ProductTable ",
+    icon: Package,
+    href: "/admin/ProductTable",
   },
   {
     title: "Settings",
