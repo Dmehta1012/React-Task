@@ -91,7 +91,6 @@ export const ProductTable = () => {
         </Button>
       </div>
 
-      {/* ADD FORM */}
       {showAddForm && (
         <div className="mb-6 p-4 border rounded-xl bg-gray-50 shadow-sm flex gap-3">
           <Input
@@ -115,7 +114,6 @@ export const ProductTable = () => {
         </div>
       )}
 
-      {/* TABLE */}
       <div className="border rounded-xl shadow-sm bg-white overflow-hidden">
         <Table>
           <TableHeader className="bg-gray-100">
@@ -214,7 +212,6 @@ export const ProductTable = () => {
         </Table>
       </div>
 
-      {/* PAGINATION */}
       <div className="flex items-center justify-between mt-6">
         <Button
           variant="outline"

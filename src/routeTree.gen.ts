@@ -9,43 +9,48 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as SignupRouteImport } from './routes/signup'
-import { Route as LoginRouteImport } from './routes/login'
-import { Route as ContactRouteImport } from './routes/contact'
-import { Route as BlogRouteImport } from './routes/blog'
+import { Route as _landingRouteImport } from './routes/__landing'
 import { Route as _adminRouteImport } from './routes/__admin'
-import { Route as IndexRouteImport } from './routes/index'
+import { Route as _landingIndexRouteImport } from './routes/__landing/index'
+import { Route as _landingContactRouteImport } from './routes/__landing/contact'
+import { Route as _landingBlogRouteImport } from './routes/__landing/blog'
+import { Route as _authSignupRouteImport } from './routes/__auth/signup'
+import { Route as _authLoginRouteImport } from './routes/__auth/login'
 import { Route as _adminAdminIndexRouteImport } from './routes/__admin/admin/index'
 import { Route as _adminAdminProductsRouteImport } from './routes/__admin/admin/products'
 import { Route as _adminAdminProductTableRouteImport } from './routes/__admin/admin/ProductTable'
 
-const SignupRoute = SignupRouteImport.update({
-  id: '/signup',
-  path: '/signup',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const LoginRoute = LoginRouteImport.update({
-  id: '/login',
-  path: '/login',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ContactRoute = ContactRouteImport.update({
-  id: '/contact',
-  path: '/contact',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BlogRoute = BlogRouteImport.update({
-  id: '/blog',
-  path: '/blog',
+const _landingRoute = _landingRouteImport.update({
+  id: '/__landing',
   getParentRoute: () => rootRouteImport,
 } as any)
 const _adminRoute = _adminRouteImport.update({
   id: '/__admin',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
+const _landingIndexRoute = _landingIndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => _landingRoute,
+} as any)
+const _landingContactRoute = _landingContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => _landingRoute,
+} as any)
+const _landingBlogRoute = _landingBlogRouteImport.update({
+  id: '/blog',
+  path: '/blog',
+  getParentRoute: () => _landingRoute,
+} as any)
+const _authSignupRoute = _authSignupRouteImport.update({
+  id: '/__auth/signup',
+  path: '/signup',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const _authLoginRoute = _authLoginRouteImport.update({
+  id: '/__auth/login',
+  path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
 const _adminAdminIndexRoute = _adminAdminIndexRouteImport.update({
@@ -65,33 +70,34 @@ const _adminAdminProductTableRoute = _adminAdminProductTableRouteImport.update({
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/blog': typeof BlogRoute
-  '/contact': typeof ContactRoute
-  '/login': typeof LoginRoute
-  '/signup': typeof SignupRoute
+  '/login': typeof _authLoginRoute
+  '/signup': typeof _authSignupRoute
+  '/blog': typeof _landingBlogRoute
+  '/contact': typeof _landingContactRoute
+  '/': typeof _landingIndexRoute
   '/admin/ProductTable': typeof _adminAdminProductTableRoute
   '/admin/products': typeof _adminAdminProductsRoute
   '/admin': typeof _adminAdminIndexRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/blog': typeof BlogRoute
-  '/contact': typeof ContactRoute
-  '/login': typeof LoginRoute
-  '/signup': typeof SignupRoute
+  '/login': typeof _authLoginRoute
+  '/signup': typeof _authSignupRoute
+  '/blog': typeof _landingBlogRoute
+  '/contact': typeof _landingContactRoute
+  '/': typeof _landingIndexRoute
   '/admin/ProductTable': typeof _adminAdminProductTableRoute
   '/admin/products': typeof _adminAdminProductsRoute
   '/admin': typeof _adminAdminIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
   '/__admin': typeof _adminRouteWithChildren
-  '/blog': typeof BlogRoute
-  '/contact': typeof ContactRoute
-  '/login': typeof LoginRoute
-  '/signup': typeof SignupRoute
+  '/__landing': typeof _landingRouteWithChildren
+  '/__auth/login': typeof _authLoginRoute
+  '/__auth/signup': typeof _authSignupRoute
+  '/__landing/blog': typeof _landingBlogRoute
+  '/__landing/contact': typeof _landingContactRoute
+  '/__landing/': typeof _landingIndexRoute
   '/__admin/admin/ProductTable': typeof _adminAdminProductTableRoute
   '/__admin/admin/products': typeof _adminAdminProductsRoute
   '/__admin/admin/': typeof _adminAdminIndexRoute
@@ -99,74 +105,52 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    | '/'
-    | '/blog'
-    | '/contact'
     | '/login'
     | '/signup'
+    | '/blog'
+    | '/contact'
+    | '/'
     | '/admin/ProductTable'
     | '/admin/products'
     | '/admin'
   fileRoutesByTo: FileRoutesByTo
   to:
-    | '/'
-    | '/blog'
-    | '/contact'
     | '/login'
     | '/signup'
+    | '/blog'
+    | '/contact'
+    | '/'
     | '/admin/ProductTable'
     | '/admin/products'
     | '/admin'
   id:
     | '__root__'
-    | '/'
     | '/__admin'
-    | '/blog'
-    | '/contact'
-    | '/login'
-    | '/signup'
+    | '/__landing'
+    | '/__auth/login'
+    | '/__auth/signup'
+    | '/__landing/blog'
+    | '/__landing/contact'
+    | '/__landing/'
     | '/__admin/admin/ProductTable'
     | '/__admin/admin/products'
     | '/__admin/admin/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
   _adminRoute: typeof _adminRouteWithChildren
-  BlogRoute: typeof BlogRoute
-  ContactRoute: typeof ContactRoute
-  LoginRoute: typeof LoginRoute
-  SignupRoute: typeof SignupRoute
+  _landingRoute: typeof _landingRouteWithChildren
+  _authLoginRoute: typeof _authLoginRoute
+  _authSignupRoute: typeof _authSignupRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/signup': {
-      id: '/signup'
-      path: '/signup'
-      fullPath: '/signup'
-      preLoaderRoute: typeof SignupRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/login': {
-      id: '/login'
-      path: '/login'
-      fullPath: '/login'
-      preLoaderRoute: typeof LoginRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/contact': {
-      id: '/contact'
-      path: '/contact'
-      fullPath: '/contact'
-      preLoaderRoute: typeof ContactRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/blog': {
-      id: '/blog'
-      path: '/blog'
-      fullPath: '/blog'
-      preLoaderRoute: typeof BlogRouteImport
+    '/__landing': {
+      id: '/__landing'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof _landingRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/__admin': {
@@ -176,11 +160,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof _adminRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
+    '/__landing/': {
+      id: '/__landing/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+      preLoaderRoute: typeof _landingIndexRouteImport
+      parentRoute: typeof _landingRoute
+    }
+    '/__landing/contact': {
+      id: '/__landing/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof _landingContactRouteImport
+      parentRoute: typeof _landingRoute
+    }
+    '/__landing/blog': {
+      id: '/__landing/blog'
+      path: '/blog'
+      fullPath: '/blog'
+      preLoaderRoute: typeof _landingBlogRouteImport
+      parentRoute: typeof _landingRoute
+    }
+    '/__auth/signup': {
+      id: '/__auth/signup'
+      path: '/signup'
+      fullPath: '/signup'
+      preLoaderRoute: typeof _authSignupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/__auth/login': {
+      id: '/__auth/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof _authLoginRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/__admin/admin/': {
@@ -222,13 +234,27 @@ const _adminRouteChildren: _adminRouteChildren = {
 const _adminRouteWithChildren =
   _adminRoute._addFileChildren(_adminRouteChildren)
 
+interface _landingRouteChildren {
+  _landingBlogRoute: typeof _landingBlogRoute
+  _landingContactRoute: typeof _landingContactRoute
+  _landingIndexRoute: typeof _landingIndexRoute
+}
+
+const _landingRouteChildren: _landingRouteChildren = {
+  _landingBlogRoute: _landingBlogRoute,
+  _landingContactRoute: _landingContactRoute,
+  _landingIndexRoute: _landingIndexRoute,
+}
+
+const _landingRouteWithChildren = _landingRoute._addFileChildren(
+  _landingRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
   _adminRoute: _adminRouteWithChildren,
-  BlogRoute: BlogRoute,
-  ContactRoute: ContactRoute,
-  LoginRoute: LoginRoute,
-  SignupRoute: SignupRoute,
+  _landingRoute: _landingRouteWithChildren,
+  _authLoginRoute: _authLoginRoute,
+  _authSignupRoute: _authSignupRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
